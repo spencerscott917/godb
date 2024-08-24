@@ -29,3 +29,6 @@ func (node BNode) getPointer(idx uint16) uint16 {
 	pos := HEADER_SIZE + 8*idx
 	return binary.LittleEndian.Uint16(node[pos:])
 }
+
+// not sure how this function is supposed to work, but it's how it is in the book
+func (node BNode) setPointer(idx uint16, val uint64)
