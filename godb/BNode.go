@@ -48,9 +48,13 @@ func offsetPos(node BNode, idx uint16) uint16 {
 	return HEADER_SIZE + 8*node.nKeys() + 2*(idx-1)
 }
 
-func (node BNode) getOffset(idx) uint16 {
+func (node BNode) getOffset(idx uint16) uint16 {
 	if idx == 0 {
 		return 0
 	}
 	return binary.LittleEndian.Uint16(node[offsetPos(node, idx):])
+}
+
+func (node BNode) setOffset(idx uint16, offset uint16) {
+	binary.LittleEndian.PutUint16(node[offsetPos(node, idx):], offset)
 }
