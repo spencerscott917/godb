@@ -47,5 +47,5 @@ func (node BNode) getOffset(idx) uint16 {
 	if idx == 0 {
 		return 0
 	}
-	return binary.LittleEndian.Uint16(node[offsetPos(node, idx)]:)
+	return binary.LittleEndian.Uint16(node[offsetPos(node, idx):])
 }
