@@ -37,8 +37,15 @@ func (node BNode) setPointer(idx uint16, val uint64)
 
 // kv store
 func offsetPos(node BNode, idx uint16) uint16 {
-	if {idx < 1 || idx > node.nKeys()
+	if idx < 1 || idx > node.nKeys() {
 		panic("OffsetPos outside of node bounds")
 	}
-	return HEADER_SIZE + 8 * node.nKeys() + 2 * (idx - 1)
+	return HEADER_SIZE + 8*node.nKeys() + 2*(idx-1)
+}
+
+func (node BNode) getOffset(idx) uint16 {
+	if idx == 0 {
+		return 0
+	}
+	return binary.LittleEndian.Uint16(node[offsetPos(node, idx)]:)
 }
