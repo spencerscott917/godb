@@ -9,6 +9,7 @@ const (
 
 type BNode []byte
 
+// Header
 func (node BNode) nodeType() uint16 {
 	return binary.LittleEndian.Uint16(node[0:2])
 }
@@ -22,6 +23,7 @@ func (node BNode) setHeader(nodeType uint16, nKeys uint16) {
 	binary.LittleEndian.PutUint16(node[2:4], nKeys)
 }
 
+// child pointers
 func (node BNode) getPointer(idx uint16) uint16 {
 	if idx >= node.nKeys() {
 		panic("Attempted to get pointer outside of node")
@@ -32,3 +34,11 @@ func (node BNode) getPointer(idx uint16) uint16 {
 
 // not sure how this function is supposed to work, but it's how it is in the book
 func (node BNode) setPointer(idx uint16, val uint64)
+
+// kv store
+func offsetPos(node BNode, idx uint16) uint16 {
+	if {idx < 1 || idx > node.nKeys()
+		panic("OffsetPos outside of node bounds")
+	}
+	return HEADER_SIZE + 8 * node.nKeys() + 2 * (idx - 1)
+}
