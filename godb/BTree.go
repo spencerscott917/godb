@@ -8,6 +8,7 @@ const (
 )
 
 func init() {
+	// why is this called node1max, and what are 8, 2, and 4 here?
 	node1max := HEADER_SIZE + 8 + 2 + 4 + BTREE_MAX_KEY_SIZE + BTREE_MAX_VAL_SIZE
 	if node1max > BTREE_PAGE_SIZE {
 		panic("node1max greater than BTREE_PAGE_SIZE")
