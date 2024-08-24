@@ -32,8 +32,13 @@ func (node BNode) getPointer(idx uint16) uint16 {
 	return binary.LittleEndian.Uint16(node[pos:])
 }
 
-// not sure how this function is supposed to work, but it's how it is in the book
-func (node BNode) setPointer(idx uint16, val uint64)
+func (node BNode) setPointer(idx uint16, val uint64) {
+	if idx >= node.nKeys() {
+		panic("Attempted to get pointer outside of node")
+	}
+	pos := HEADER_SIZE + 8*idx
+	binary.LittleEndian.PutUint16(node[pos:], val)
+}
 
 // kv store
 func offsetPos(node BNode, idx uint16) uint16 {
